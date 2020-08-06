@@ -9,15 +9,28 @@
   <meta name="author" content="Johan Idstam">
 
   <link rel="stylesheet" href="jsi.css?v=1.0">
+  <script src="skattekonto.js"></script>
 
 </head>
 
-<body>
+<body onload="pageLoaded()">
 <h1>Skattekonto till bokföring</h1>
 <p>Här kan du översätta transaktioner från skattekontot till något som går att bokföra.</p>
+<hr>
 
-<h2>Klistra in transaktionerna här:</h2>
-<textarea cols="120" rows="20"></textarea>
-  <script src="skattekonto.js"></script>
+<p>Klistra in transaktionerna här:</p>
+	<textarea id="inputData" cols="120" rows="10" oninput="handleInput()"></textarea>
+
+<p>Bokför detta:</p>
+	<table id="outTable">
+    <tr>
+      <th>Datum</th>
+      <th>Debit</th>
+      <th>Kredit</th>
+      <th>Belopp</th>
+      <th>Spec</th>
+    </tr>
+</label>
+
 </body>
 </html>

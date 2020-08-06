@@ -5,6 +5,11 @@ body {
 	font-family: "Courier New", Courier, monospace;
 }
 
+textarea {
+    background-color: #333333;
+    color: #FF9900;
+    font-family: "Courier New", Courier, monospace;
+}
 hr {
     display: block;
     height: 1px;
@@ -99,3 +104,15 @@ table {
 table, th, td {
     border: 1px solid #FF9900;
  }
+
+ #outTable td{
+     padding: 2pt;
+     padding-left: 5pt;
+     padding-right: 5pt;
+     white-space: nowrap;
+ }
+
+ #outTable th{
+    text-align: left;
+    white-space: nowrap;
+}
