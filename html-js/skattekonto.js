@@ -89,9 +89,9 @@ var parseInput = function () {
 			}
 
 			if(momsExp.test(line)){
-				voucher = createVoucher(curDate, "1630", "2650", amount, spec);
+				voucher = createVoucher(curDate, "1630", "1650", amount, spec);
 				if(tokens[2].trim().startsWith("-")){
-					voucher = swapDebitKredit(voucher);
+					voucher = createVoucher(curDate, "2650", "1630", amount, spec);
 				}
 				out.push(voucher);
 				continue;
