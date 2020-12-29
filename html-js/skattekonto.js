@@ -44,7 +44,12 @@ var parseInput = function () {
 	let avgAExp = /Förs.avgift/
 	let avgBExp = /Förseningsavgift/
 	let inbetExp = /Inbetalning/
+	let utbetExp = /Utbetalning/
 	let avdragenExp = /vdragen skatt/
+	let tillgodoPrel = /Tillgodof/
+	let debiteradPrel = /prelimin/  //Order is important here. Check /tillgodoPrel/ before this.
+	let slutligSkatt = /Slutlig skatt/
+	let skatteTillagg = /Skattetillägg/
 
 	var inDate = false
 	var curDate = "";
@@ -73,6 +78,11 @@ var parseInput = function () {
 			var spec = tokens[1].trim();
 			if(inbetExp.test(line)){
 				voucher = createVoucher(curDate, "1630", "1930", amount, spec);
+				out.push(voucher);
+				continue;
+			}
+			if(utbetExp.test(line)){
+				voucher = createVoucher(curDate, "1930", "1630", amount, spec);
 				out.push(voucher);
 				continue;
 			}
@@ -108,11 +118,28 @@ var parseInput = function () {
 				continue;
 			}
 
-			if(avgAExp.test(line) || avgBExp.test(line)){
+			if(avgAExp.test(line) || avgBExp.test(line) || skatteTillagg.test(line)){
 				voucher = createVoucher(curDate, "6992", "1630", amount, spec)
 				out.push(voucher);
 				continue;
 			}
+
+			if(tillgodoPrel.test(line)){
+				voucher = createVoucher(curDate, "1630", "2510", amount, spec)
+				out.push(voucher);
+				continue;
+			}
+			if(debiteradPrel.test(line)){
+				voucher = createVoucher(curDate, "2510", "1630", amount, spec)
+				out.push(voucher);
+				continue;
+			}
+			if(slutligSkatt.test(line)){
+				voucher = createVoucher(curDate, "2510", "1630", amount, spec)
+				out.push(voucher);
+				continue;
+			}
+
 
 			voucher = createVoucher(curDate, "UNKNOWN", "UNKNOWN", amount, line);
 			out.push(voucher);
